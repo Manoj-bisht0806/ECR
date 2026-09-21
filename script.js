@@ -7,11 +7,15 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         saveEcrData();
     });
+
+    const downloadBtn = document.getElementById("downloadExcelBtn");
+    downloadBtn.addEventListener("click", () => {
+        downloadExcelFile();
+    });
 });
 
 function loadConfigOptions() {
     if (typeof CONFIG !== "undefined") {
-        // Plant Options
         const plantSelect = document.getElementById("plant");
         if (CONFIG.plants) {
             CONFIG.plants.forEach(plant => {
@@ -22,7 +26,6 @@ function loadConfigOptions() {
             });
         }
 
-        // Status Options
         const statusSelect = document.getElementById("status");
         if (CONFIG.statuses) {
             CONFIG.statuses.forEach(status => {
@@ -33,7 +36,6 @@ function loadConfigOptions() {
             });
         }
 
-        // Priority Options (A, B, C, D)
         const prioritySelect = document.getElementById("priority");
         if (CONFIG.priorities) {
             CONFIG.priorities.forEach(priority => {
@@ -98,7 +100,7 @@ function loadTableData() {
             <td>${item.agreementRaiseBy}</td>
             <td>${item.ecrType}</td>
             <td>${item.pendingSince}</td>
-            <td class="status-${item.status}">${item.status}</td>
+            <td>${item.status}</td>
             <td>${item.product}</td>
             <td>${item.vendor}</td>
             <td>${item.hqPic}</td>
@@ -112,4 +114,45 @@ function loadTableData() {
         `;
         tableBody.appendChild(row);
     });
+}
+
+function downloadExcelFile() {
+    let ecrList = JSON.parse(localStorage.getItem("ecrList")) || [];
+    if (ecrList.length === 0) {
+        alert("Download karne ke liye koi data available nahi hai!");
+        return;
+    }
+
+    // Friendly headers mapping for Excel
+    const formattedData = ecrList.map(item => ({
+        "S.N no": item.snNo,
+        "HQ EC no": item.hqEcNo,
+        "SIEL EC no": item.sielEcNo,
+        "EC Received Date": item.ecReceivedDate,
+        "Title": item.title,
+        "Reason": item.reason,
+        "Plant": item.plant,
+        "Agreement Raise By": item.agreementRaiseBy,
+        "ECR Type": item.ecrType,
+        "Pending Since": item.pendingSince,
+        "Status": item.status,
+        "Product": item.product,
+        "Vendor": item.vendor,
+        "HQ PIC": item.hqPic,
+        "RUN Date": item.runDate,
+        "ECR Approval Week": item.ecrApprovalWeek,
+        "Local/Import": item.localImport,
+        "PA": item.pa,
+        "Partcode": item.partcode,
+        "Remarks": item.remarks,
+        "Priority": item.priority
+    }));
+
+    // Create worksheet and workbook using SheetJS
+    const worksheet = XLSX.utils.json_to_sheet(formattedData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "ECR Records");
+
+    // Trigger download
+    XLSX.writeFile(workbook, "ECR_Management_Records.xlsx");
 }
