@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW Part ECR Management & Monitoring</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>HW Part ECR Management & Monitoring Dashboard</h2>
+        
+        <!-- Data Entry Form -->
+        <form id="ecrForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>S.N no</label>
+                    <input type="text" id="snNo" required>
+                </div>
+                <div class="form-group">
+                    <label>HQ EC no</label>
+                    <input type="text" id="hqEcNo" required>
+                </div>
+                <div class="form-group">
+                    <label>SIEL EC no</label>
+                    <input type="text" id="sielEcNo" required>
+                </div>
+                <div class="form-group">
+                    <label>EC Received Date</label>
+                    <input type="date" id="ecReceivedDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="title" required>
+                </div>
+                <div class="form-group">
+                    <label>Reason</label>
+                    <input type="text" id="reason" required>
+                </div>
+                <div class="form-group">
+                    <label>Plant</label>
+                    <select id="plant" required>
+                        <option value="">Select Plant</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Agreement Raise By</label>
+                    <input type="text" id="agreementRaiseBy" required>
+                </div>
+                <div class="form-group">
+                    <label>ECR Type</label>
+                    <input type="text" id="ecrType" required>
+                </div>
+                <div class="form-group">
+                    <label>Pending Since</label>
+                    <input type="text" id="pendingSince" required>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="status" required>
+                        <option value="">Select Status</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Product</label>
+                    <input type="text" id="product" required>
+                </div>
+                <div class="form-group">
+                    <label>Vendor</label>
+                    <input type="text" id="vendor" required>
+                </div>
+                <div class="form-group">
+                    <label>HQ PIC</label>
+                    <input type="text" id="hqPic" required>
+                </div>
+                <div class="form-group">
+                    <label>RUN Date</label>
+                    <input type="date" id="runDate" required>
+                </div>
+                <div class="form-group">
+                    <label>ECR Approval Week</label>
+                    <input type="text" id="ecrApprovalWeek" required>
+                </div>
+                <div class="form-group">
+                    <label>Local/Import</label>
+                    <select id="localImport" required>
+                        <option value="">Select Option</option>
+                        <option value="Local">Local</option>
+                        <option value="Import">Import</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>PA</label>
+                    <input type="text" id="pa" required>
+                </div>
+                <div class="form-group">
+                    <label>Partcode</label>
+                    <input type="text" id="partcode" required>
+                </div>
+                <div class="form-group">
+                    <label>Remarks</label>
+                    <input type="text" id="remarks">
+                </div>
+                <div class="form-group">
+                    <label>Priority</label>
+                    <select id="priority" required>
+                        <option value="">Select Priority</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" id="addBtn">Add ECR Entry</button>
+        </form>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- Data Display Table -->
+        <h2>ECR Records</h2>
+        <div class="table-responsive">
+            <table id="ecrTable">
+                <thead>
+                    <tr>
+                        <th>S.N</th>
+                        <th>HQ EC No</th>
+                        <th>SIEL EC No</th>
+                        <th>Received Date</th>
+                        <th>Title</th>
+                        <th>Reason</th>
+                        <th>Plant</th>
+                        <th>Agreement By</th>
+                        <th>ECR Type</th>
+                        <th>Pending Since</th>
+                        <th>Status</th>
+                        <th>Product</th>
+                        <th>Vendor</th>
+                        <th>HQ PIC</th>
+                        <th>RUN Date</th>
+                        <th>Approval Week</th>
+                        <th>Local/Import</th>
+                        <th>PA</th>
+                        <th>Partcode</th>
+                        <th>Remarks</th>
+                        <th>Priority</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Dynamic rows will appear here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
