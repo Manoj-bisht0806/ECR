@@ -10,24 +10,39 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function loadConfigOptions() {
-    const plantSelect = document.getElementById("plant");
-    if (typeof CONFIG !== "undefined" && CONFIG.plants) {
-        CONFIG.plants.forEach(plant => {
-            const opt = document.createElement("option");
-            opt.value = plant;
-            opt.textContent = plant;
-            plantSelect.appendChild(opt);
-        });
-    }
+    if (typeof CONFIG !== "undefined") {
+        // Plant Options
+        const plantSelect = document.getElementById("plant");
+        if (CONFIG.plants) {
+            CONFIG.plants.forEach(plant => {
+                const opt = document.createElement("option");
+                opt.value = plant;
+                opt.textContent = plant;
+                plantSelect.appendChild(opt);
+            });
+        }
 
-    const statusSelect = document.getElementById("status");
-    if (typeof CONFIG !== "undefined" && CONFIG.statuses) {
-        CONFIG.statuses.forEach(status => {
-            const opt = document.createElement("option");
-            opt.value = status;
-            opt.textContent = status;
-            statusSelect.appendChild(opt);
-        });
+        // Status Options
+        const statusSelect = document.getElementById("status");
+        if (CONFIG.statuses) {
+            CONFIG.statuses.forEach(status => {
+                const opt = document.createElement("option");
+                opt.value = status;
+                opt.textContent = status;
+                statusSelect.appendChild(opt);
+            });
+        }
+
+        // Priority Options (A, B, C, D)
+        const prioritySelect = document.getElementById("priority");
+        if (CONFIG.priorities) {
+            CONFIG.priorities.forEach(priority => {
+                const opt = document.createElement("option");
+                opt.value = priority;
+                opt.textContent = priority;
+                prioritySelect.appendChild(opt);
+            });
+        }
     }
 }
 
@@ -70,7 +85,7 @@ function loadTableData() {
 
     let ecrList = JSON.parse(localStorage.getItem("ecrList")) || [];
 
-    ecrList.forEach((item, index) => {
+    ecrList.forEach((item) => {
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${item.snNo}</td>
@@ -94,15 +109,7 @@ function loadTableData() {
             <td>${item.partcode}</td>
             <td>${item.remarks}</td>
             <td>${item.priority}</td>
-            <td><button class="delete-btn" onclick="deleteEntry(${index})">Delete</button></td>
         `;
         tableBody.appendChild(row);
     });
-}
-
-function deleteEntry(index) {
-    let ecrList = JSON.parse(localStorage.getItem("ecrList")) || [];
-    ecrList.splice(index, 1);
-    localStorage.setItem("ecrList", JSON.stringify(ecrList));
-    loadTableData();
 }
