@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HW Part ECR Management & Monitoring</title>
     <link rel="stylesheet" href="style.css">
+    <!-- SheetJS Library Excel download ke liye -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -113,8 +115,13 @@
 
         <hr style="margin: 30px 0;">
 
+        <!-- Header with Download Excel Button -->
+        <div class="table-header-flex" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h2>ECR Records</h2>
+            <button id="downloadExcelBtn" style="background-color: #217346; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">📥 Download Excel (.xlsx)</button>
+        </div>
+
         <!-- Data Display Table -->
-        <h2>ECR Records</h2>
         <div class="table-responsive">
             <table id="ecrTable">
                 <thead>
